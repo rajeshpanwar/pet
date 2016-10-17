@@ -1,0 +1,65 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h3> Login </h3>
+
+            <div ng-controller="loginCtrl">
+
+                <form ng-submit="submit()">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address*</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"
+                               ng-model="data.email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password*</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                               ng-model="data.password">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+
+            <h3> Registration </h3>
+
+            <div ng-controller="registrationCtrl">
+
+                <form ng-submit="submit()">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">First name</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email"
+                               ng-model="data.first_name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address*</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"
+                               ng-model="data.email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password*</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                               ng-model="data.password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Confirm Password* </label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                               ng-model="data.confirm_password">
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
