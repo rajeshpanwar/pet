@@ -6,9 +6,10 @@
     "start": "node app"
   },
   "dependencies": {
+    "connect-file-store": "0.0.3",
     "express": "3.1.0",
-    "nconf" : "*",
-    "path" : "*"
+    "mongodb": "1.4.38",
+    "nconf": "*",
+    "path": "*"
   }
 }
-

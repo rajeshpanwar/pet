@@ -1,0 +1,24 @@
+<div class="container" ng-controller="petCtrl">
+    <div class="row">
+
+        <table class="table">
+            <tr>
+                <th>Pet</th>
+                <th>Cost</th>
+                <th>Selected</th>
+            </tr>
+            <tr ng-repeat="pet in pets">
+                <th>{{pet.pet}}</th>
+                <th>{{pet.cost}}</th>
+                <th>{{pet.selected}}</th>
+            </tr>
+        </table>
+
+    </div>
+
+    <div >
+        <a href="/shop"  class="btn btn-primary"> Select </a>
+    </div>
+
+
+</div>

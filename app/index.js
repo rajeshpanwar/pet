@@ -33,6 +33,36 @@ app.use(function (req, res, next) {
 // TODO remove this. All static files should be served from CDN.
 app.use(express.static(__dirname + '/frontend'));
 
+app.use(express.bodyParser());
+
+// session
+
+// support _method (PUT in forms etc)
+app.use(express.methodOverride());
+app.use(express.cookieParser());
+
+var FSStore = require('connect-file-store')(express);
+
+var user_session = express.session({
+    key: 'jsessionid',
+    secret: 'aersda@#$32sfas2342',
+    cookie: {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+    },
+    store: new FSStore({
+        path: '/tmp/sessions',
+        reapInterval: -1
+    })
+});
+app.use(function (req, res, next) {
+    user_session(req, res, next);
+})
+
+
+app.use(function (error, req, res, next) {
+    res.send(406, "Empty Body.");
+});
+
 process.on('uncaughtException', function (err) {
     console.log(err.statusCode);
 });
@@ -41,18 +71,42 @@ app.options('*', function (req, res, next) {
     res.send(200);
 });
 
+app.use(function(req, res, next){
+
+    console.log("Request.session >>>>>>>", req.session.user);
+
+   next();
+})
+
+
+app.use(function(req, res, next){
+    if (req.headers.ajax == '1') {
+        return next();
+    }
+    res.sendfile(path.join(__dirname, './frontend/index.html'));
+})
 
 app.post('/api/v1/user/registration', function (req, res, next) {
     console.log("------------here ::", req.body);
     require('commands').registration(req, res, next);
 })
 
-app.get('/', function (req, res) {
-    if (req.headers.ajax == '1') {
-        return next();
-    }
-    res.sendfile(path.join(__dirname, './frontend/index.html'));
-});
+app.post('/api/v1/user/login', function (req, res, next) {
+    console.log("------------here ::", req.body);
+    require('commands').login(req, res, next);
+})
+
+app.get('/api/v1/pet/list', function(req, res, next){
+    require('commands').petlist(req, res, next);
+})
+
+app.get('/api/v1/pet/selected-pet', function(req, res, next){
+    require('commands').selectPetlist(req, res, next);
+})
+
+app.put('/api/v1/user/updatepetSelection', function(req, res, next){
+    require('commands').updatepetSelection(req, res, next);
+})
 
 
 var server = app.listen(3000);
